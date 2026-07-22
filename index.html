@@ -73,7 +73,7 @@
         }
 
         html, body {
-            overflow-x: hidden; /* Bloqueia rolagem horizontal no celular */
+            overflow-x: hidden; 
             width: 100%;
         }
 
@@ -150,17 +150,16 @@
             transform: translateX(5px);
         }
 
-        /* ─── HERO SECTION (ADAPTADA PARA O FORMULÁRIO) ─── */
+        /* ─── HERO SECTION (MODIFICADA: SEM FORMULÁRIO E MAIS LIMPA) ─── */
         .hero {
             position: relative;
             color: white;
-            padding: 160px 5% 100px; 
+            padding: 180px 5% 140px; 
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 40px;
+            justify-content: center;
+            text-align: center;
             z-index: 1;
-            text-align: left;
         }
         
         .hero::before {
@@ -168,7 +167,8 @@
             position: absolute;
             top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: url('https://i.imgur.com/8N8CArq.jpg') center/cover no-repeat;
-            filter: blur(0.5px);
+            /* Desfoque removido para mostrar a foto nítida */
+            filter: blur(0px);
             z-index: -2;
         }
 
@@ -176,23 +176,24 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(0, 30, 60, 0.50), rgba(0, 86, 179, 0.70));
+            /* Degradê suavizado para revelar mais a imagem */
+            background: linear-gradient(rgba(0, 15, 30, 0.40), rgba(0, 50, 120, 0.60));
             z-index: -1;
         }
 
         .hero-content {
-            width: 50%;
-            max-width: 650px;
+            width: 100%;
+            max-width: 800px;
         }
 
         .hero h1 { 
-            font-size: 3rem; 
+            font-size: 3.5rem; 
             margin-bottom: 20px; 
             text-shadow: 2px 2px 5px rgba(0,0,0,0.8); 
             line-height: 1.2; 
         }
         .hero p { 
-            font-size: 1.15rem; 
+            font-size: 1.25rem; 
             margin-bottom: 40px; 
             text-shadow: 1px 1px 4px rgba(0,0,0,0.9); 
             font-weight: 500;
@@ -204,14 +205,15 @@
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
-            flex-wrap: nowrap; /* Trava em uma linha */
-            white-space: nowrap; /* Não deixa o texto quebrar */
+            flex-wrap: nowrap;
+            white-space: nowrap; 
             gap: 10px;
             color: var(--text-color);
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             max-width: 100%;
-            overflow: hidden; /* Se a tela for absurdamente pequena, não quebra layout */
+            overflow: hidden;
+            justify-content: center;
         }
         .stars {
             display: flex;
@@ -222,10 +224,24 @@
         .stars i { color: var(--gold-star); font-size: 1.1rem; }
         .google-rating span { font-weight: bold; font-size: 0.95rem; }
 
-        /* ─── FORMULÁRIO INTELIGENTE CSS ─── */
-        .hero-form-wrapper { width: 45%; max-width: 500px; z-index: 10; }
+        /* ─── NOVA SEÇÃO DO FORMULÁRIO ─── */
+        .form-section {
+            padding: 80px 5%;
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         
-        .card { background: #fff; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); overflow: hidden; width: 100%; color: var(--f-text-dark); }
+        .form-wrapper { 
+            width: 100%; 
+            max-width: 600px; 
+            z-index: 10; 
+            margin-top: 30px;
+        }
+        
+        /* Estilos base do Card do formulário */
+        .card { background: #fff; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); overflow: hidden; width: 100%; color: var(--f-text-dark); }
         .trilha { display: flex; align-items: center; gap: 8px; padding: 24px 24px 0; }
         .segmento { height: 6px; flex: 1; background: #eee; border-radius: 4px; overflow: hidden; }
         .preenchido { height: 100%; width: 0%; background: var(--secondary-color); border-radius: 4px; transition: width .4s ease; }
@@ -290,7 +306,7 @@
         .section-subtitle { color: #666; margin-bottom: 50px; font-size: 1.1rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; padding: 0 15px;}
 
         /* ─── NOSSOS SERVIÇOS ─── */
-        .services-section { padding: 80px 5%; background-color: var(--bg-light); }
+        .services-section { padding: 80px 5%; background-color: white; }
         .services-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); 
@@ -343,21 +359,21 @@
         .vip-mini-gallery img:hover { transform: scale(1.05); }
 
         /* ─── SESSÃO SOBRE A ECOCLEAN ─── */
-        .about-section { padding: 80px 5%; background-color: white; }
+        .about-section { padding: 80px 5%; background-color: var(--bg-light); }
         .about-container { max-width: 1200px; margin: 0 auto; }
         .about-header { text-align: center; margin-bottom: 50px; }
         .about-content { color: #555; font-size: 1.05rem; line-height: 1.8; text-align: justify; }
         .about-content strong { color: var(--primary-color); }
         .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0; }
-        .about-card { background: var(--bg-light); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--secondary-color); transition: 0.3s; }
+        .about-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--secondary-color); transition: 0.3s; }
         .about-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .about-card h4 { color: var(--primary-color); margin-bottom: 12px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
         .about-card i { color: var(--secondary-color); font-size: 1.5rem; }
-        .about-footer-text { background: var(--bg-light); padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #eee; }
+        .about-footer-text { background: white; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #eee; }
         .about-footer-text h3 { color: var(--primary-color); margin-bottom: 15px; }
 
         /* ─── QUALIDADE ECOCLEAN ─── */
-        .quality-section { padding: 80px 0; background-color: var(--bg-light); }
+        .quality-section { padding: 80px 0; background-color: white; }
         .quality-section .section-title, .quality-section .section-subtitle { padding: 0 5%; }
         .quality-card { 
             width: 600px; height: 400px; flex-shrink: 0; border-radius: 15px; 
@@ -386,9 +402,9 @@
         .close-modal:hover { color: var(--secondary-color); }
 
         /* ─── FAQ ─── */
-        .faq-section { padding: 80px 5%; background-color: white; }
+        .faq-section { padding: 80px 5%; background-color: var(--bg-light); }
         .faq-container { max-width: 800px; margin: 0 auto; width: 100%; }
-        details { background: var(--bg-light); border-radius: 8px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
+        details { background: white; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); overflow: hidden; transition: 0.3s; }
         summary { padding: 20px; font-weight: 600; font-size: 1.1rem; color: var(--primary-color); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '\f078'; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--secondary-color); transition: 0.3s; flex-shrink: 0;}
@@ -396,28 +412,28 @@
         .faq-answer { padding: 0 20px 20px; color: #555; line-height: 1.7; border-top: 1px solid #eee; margin-top: 10px; padding-top: 15px; }
 
         /* ─── EQUIPAMENTOS E TECNOLOGIA ─── */
-        .equipment-section { padding: 80px 5%; background-color: var(--bg-light); }
+        .equipment-section { padding: 80px 5%; background-color: white; }
         .equipment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .equipment-card { background: white; padding: 40px 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid var(--secondary-color); }
+        .equipment-card { background: var(--bg-light); padding: 40px 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid var(--secondary-color); }
         .equipment-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .equipment-card i { font-size: 3.5rem; color: var(--secondary-color); margin-bottom: 20px; }
         .equipment-card h3 { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 15px; }
         .equipment-card p { color: #555; font-size: 0.95rem; line-height: 1.6;}
 
         /* ─── CARROSSEL REVIEWS E FOTOS ─── */
-        .social-proof { padding: 80px 0; background-color: white; overflow: hidden; width: 100%; }
+        .social-proof { padding: 80px 0; background-color: var(--bg-light); overflow: hidden; width: 100%; }
         .social-proof .section-title, .social-proof .section-subtitle { padding: 0 5%; }
         .reviews-strip { display: flex; gap: 20px; padding: 20px 0; overflow: hidden; white-space: nowrap; position: relative; width: 100%; }
         .reviews-strip::before, .reviews-strip::after { content: ''; position: absolute; top: 0; width: 50px; height: 100%; z-index: 2; pointer-events: none;}
-        .bg-white-strip::before { left: 0; background: linear-gradient(to right, white, transparent); }
-        .bg-white-strip::after { right: 0; background: linear-gradient(to left, white, transparent); }
+        .bg-white-strip::before { left: 0; background: linear-gradient(to right, var(--bg-light), transparent); }
+        .bg-white-strip::after { right: 0; background: linear-gradient(to left, var(--bg-light), transparent); }
         .reviews-track { display: flex; gap: 20px; animation: scrollTrack 35s linear infinite; }
         .reviews-strip:hover .reviews-track { animation-play-state: paused; }
         @keyframes scrollTrack { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .review-card { width: 280px; flex-shrink: 0; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;}
         .review-card img { width: 100%; display: block; object-fit: cover;}
         
-        .review-cta { margin-top: 40px; text-align: center; background: var(--bg-light); padding: 40px 20px; border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+        .review-cta { margin-top: 40px; text-align: center; background: white; padding: 40px 20px; border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
         .review-cta h3 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.8rem; }
         .btn-google { background-color: white; color: #333; border: 2px solid #ddd; font-weight: bold; padding: 12px 30px; border-radius: 50px; display: inline-block; text-decoration: none; transition: 0.3s; margin-top: 15px; max-width: 100%; white-space: normal;}
         .btn-google:hover { border-color: #4285F4; background-color: #f4f8ff; transform: translateY(-2px); }
@@ -453,11 +469,10 @@
 
         /* ─── RESPONSIVIDADE PROFUNDA PARA CELULARES (MUITO IMPORTANTE) ─── */
         @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 130px; gap: 30px;}
+            .hero { padding-top: 130px; padding-bottom: 80px; }
             .hero-content { width: 100%; margin-bottom: 0; }
-            .hero-form-wrapper { width: 100%; max-width: 100%; }
-            .hero-content .google-rating { justify-content: center; }
-            .hero h1 { font-size: 2.2rem; }
+            .form-wrapper { width: 100%; max-width: 100%; }
+            .hero h1 { font-size: 2.8rem; }
             
             /* Ajuste de imagens lado a lado */
             .about-container > div:first-of-type { flex-direction: column; text-align: center; }
@@ -469,8 +484,8 @@
             .logo img { height: 45px; }
             
             .hero { padding-top: 110px; padding-bottom: 60px; }
-            .hero h1 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
             
             /* Ajuste críico no formulário para telas pequenas */
             .grade-servico { grid-template-columns: 1fr; } /* Fica em 1 coluna no celular para não espremer */
@@ -503,7 +518,6 @@
     </header>
 
     <section class="hero">
-        <!-- Parte do Texto à Esquerda -->
         <div class="hero-content">
             <div class="google-rating reveal">
                 <div class="stars">
@@ -515,9 +529,14 @@
             <h1 class="reveal">Especialistas em Higienização de Estofados em São Luís</h1>
             <p class="reveal">A EcoClean devolve a aparência de novo ao seu sofá, colchão, tapete e estofamento automotivo. Oferecemos lavagem profunda com busca e entrega, e uma Sala VIP exclusiva.</p>
         </div>
+    </section>
 
-        <!-- Formulário Inteligente à Direita -->
-        <div class="hero-form-wrapper reveal" style="transition-delay: 0.2s;">
+    <!-- NOVA SEÇÃO DO FORMULÁRIO -->
+    <section class="form-section" id="orcamento">
+        <h2 class="section-title reveal">Faça seu Orçamento Grátis</h2>
+        <p class="section-subtitle reveal" style="margin-bottom: 10px;">Rápido, prático e sem compromisso. Preencha os dados e receba o valor no seu WhatsApp.</p>
+        
+        <div class="form-wrapper reveal" style="transition-delay: 0.2s;">
             <div class="card">
                 <div class="trilha" id="trilha">
                     <div class="segmento"><div class="preenchido" id="barra1"></div></div>
@@ -629,6 +648,7 @@
             </div>
         </div>
     </section>
+    <!-- FIM DA NOVA SEÇÃO DO FORMULÁRIO -->
 
     <section class="services-section">
         <h2 class="section-title reveal">Nossos Serviços</h2>
@@ -920,7 +940,7 @@
         </div>
     </footer>
 
-    <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20um%20orçamento." class="floating-whatsapp" id="orcamento" target="_blank">
+    <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20um%20orçamento." class="floating-whatsapp" id="orcamentoBtnFlutuante" target="_blank">
         <i class="fa-brands fa-whatsapp"></i> <span>Chamar no WhatsApp</span>
     </a>
 
