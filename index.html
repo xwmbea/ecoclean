@@ -9,7 +9,7 @@
     <meta name="keywords" content="higienização de estofados são luís, limpeza de sofá são luís ma, lavagem a seco de sofá, lavagem de estofados perto de mim, higienização perto de mim, higienização de carro por dentro, limpa colchão, limpeza de estofados valor, lavar tapetes são luís, ecoclean">
     <meta name="author" content="EcoClean Higienizações">
 
-    <!-- FAVICON ADICIONADA AQUI -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/ZnFaubo.png">
 
     <!-- Dados Estruturados Schema.org para SEO Local -->
@@ -72,11 +72,15 @@
             scroll-behavior: smooth;
         }
 
+        html, body {
+            overflow-x: hidden; /* Bloqueia rolagem horizontal no celular */
+            width: 100%;
+        }
+
         body {
             color: var(--text-color);
             line-height: 1.6;
             background-color: white;
-            overflow-x: hidden;
         }
 
         /* ─── CABEÇALHO INTELIGENTE ─── */
@@ -99,11 +103,11 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .logo img {
-            height: 65px;
+            height: 60px;
             object-fit: contain;
             transition: height 0.3s ease;
         }
-        header.scrolled .logo img { height: 50px; }
+        header.scrolled .logo img { height: 45px; }
 
         /* ─── BOTÕES ─── */
         .btn {
@@ -150,12 +154,11 @@
         .hero {
             position: relative;
             color: white;
-            padding: 160px 5% 100px;
+            padding: 160px 5% 100px; 
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 40px;
-            overflow: hidden;
             z-index: 1;
             text-align: left;
         }
@@ -173,7 +176,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(0, 30, 60, 0.40), rgba(0, 86, 179, 0.60));
+            background: linear-gradient(rgba(0, 30, 60, 0.50), rgba(0, 86, 179, 0.70));
             z-index: -1;
         }
 
@@ -195,19 +198,20 @@
             font-weight: 500;
         }
 
-        /* Correção das Estrelas (Não quebrar a linha) */
         .google-rating {
             background: white;
             padding: 10px 25px;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
-            flex-wrap: nowrap;
-            white-space: nowrap;
+            flex-wrap: nowrap; /* Trava em uma linha */
+            white-space: nowrap; /* Não deixa o texto quebrar */
             gap: 10px;
             color: var(--text-color);
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 100%;
+            overflow: hidden; /* Se a tela for absurdamente pequena, não quebra layout */
         }
         .stars {
             display: flex;
@@ -216,7 +220,7 @@
             align-items: center;
         }
         .stars i { color: var(--gold-star); font-size: 1.1rem; }
-        .google-rating span { font-weight: bold; }
+        .google-rating span { font-weight: bold; font-size: 0.95rem; }
 
         /* ─── FORMULÁRIO INTELIGENTE CSS ─── */
         .hero-form-wrapper { width: 45%; max-width: 500px; z-index: 10; }
@@ -283,7 +287,7 @@
 
         /* ─── TÍTULOS ─── */
         .section-title { color: var(--primary-color); font-size: 2.2rem; margin-bottom: 10px; text-align: center; line-height: 1.3;}
-        .section-subtitle { color: #666; margin-bottom: 50px; font-size: 1.1rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-subtitle { color: #666; margin-bottom: 50px; font-size: 1.1rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; padding: 0 15px;}
 
         /* ─── NOSSOS SERVIÇOS ─── */
         .services-section { padding: 80px 5%; background-color: var(--bg-light); }
@@ -314,7 +318,7 @@
 
         /* ─── BANNERS DESTAQUE ─── */
         .premium-features { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); 
             gap: 20px; max-width: 1200px; margin: 40px auto 0; 
         }
         .banner { 
@@ -344,7 +348,7 @@
         .about-header { text-align: center; margin-bottom: 50px; }
         .about-content { color: #555; font-size: 1.05rem; line-height: 1.8; text-align: justify; }
         .about-content strong { color: var(--primary-color); }
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 40px 0; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0; }
         .about-card { background: var(--bg-light); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--secondary-color); transition: 0.3s; }
         .about-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .about-card h4 { color: var(--primary-color); margin-bottom: 12px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
@@ -353,7 +357,7 @@
         .about-footer-text h3 { color: var(--primary-color); margin-bottom: 15px; }
 
         /* ─── QUALIDADE ECOCLEAN ─── */
-        .quality-section { padding: 80px 0; background-color: var(--bg-light); overflow: hidden; }
+        .quality-section { padding: 80px 0; background-color: var(--bg-light); }
         .quality-section .section-title, .quality-section .section-subtitle { padding: 0 5%; }
         .quality-card { 
             width: 600px; height: 400px; flex-shrink: 0; border-radius: 15px; 
@@ -393,7 +397,7 @@
 
         /* ─── EQUIPAMENTOS E TECNOLOGIA ─── */
         .equipment-section { padding: 80px 5%; background-color: var(--bg-light); }
-        .equipment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .equipment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
         .equipment-card { background: white; padding: 40px 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid var(--secondary-color); }
         .equipment-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .equipment-card i { font-size: 3.5rem; color: var(--secondary-color); margin-bottom: 20px; }
@@ -401,12 +405,10 @@
         .equipment-card p { color: #555; font-size: 0.95rem; line-height: 1.6;}
 
         /* ─── CARROSSEL REVIEWS E FOTOS ─── */
-        .social-proof { padding: 80px 0; background-color: white; overflow: hidden; }
+        .social-proof { padding: 80px 0; background-color: white; overflow: hidden; width: 100%; }
         .social-proof .section-title, .social-proof .section-subtitle { padding: 0 5%; }
-        .reviews-strip { display: flex; gap: 20px; padding: 20px 0; overflow: hidden; white-space: nowrap; position: relative; max-width: 100vw; }
+        .reviews-strip { display: flex; gap: 20px; padding: 20px 0; overflow: hidden; white-space: nowrap; position: relative; width: 100%; }
         .reviews-strip::before, .reviews-strip::after { content: ''; position: absolute; top: 0; width: 50px; height: 100%; z-index: 2; pointer-events: none;}
-        .bg-light-strip::before { left: 0; background: linear-gradient(to right, var(--bg-light), transparent); }
-        .bg-light-strip::after { right: 0; background: linear-gradient(to left, var(--bg-light), transparent); }
         .bg-white-strip::before { left: 0; background: linear-gradient(to right, white, transparent); }
         .bg-white-strip::after { right: 0; background: linear-gradient(to left, white, transparent); }
         .reviews-track { display: flex; gap: 20px; animation: scrollTrack 35s linear infinite; }
@@ -414,6 +416,7 @@
         @keyframes scrollTrack { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .review-card { width: 280px; flex-shrink: 0; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden;}
         .review-card img { width: 100%; display: block; object-fit: cover;}
+        
         .review-cta { margin-top: 40px; text-align: center; background: var(--bg-light); padding: 40px 20px; border-radius: 15px; max-width: 800px; margin-left: auto; margin-right: auto; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
         .review-cta h3 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.8rem; }
         .btn-google { background-color: white; color: #333; border: 2px solid #ddd; font-weight: bold; padding: 12px 30px; border-radius: 50px; display: inline-block; text-decoration: none; transition: 0.3s; margin-top: 15px; max-width: 100%; white-space: normal;}
@@ -421,7 +424,7 @@
 
         /* ─── RODAPÉ ─── */
         footer { background-color: #1a1a1a; color: white; padding: 60px 5% 20px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; border-bottom: 1px solid #333; padding-bottom: 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; border-bottom: 1px solid #333; padding-bottom: 40px; }
         .footer-col h4 { color: var(--secondary-color); margin-bottom: 20px; }
         .footer-link { display: flex; align-items: center; gap: 10px; color: #ccc; text-decoration: none; margin-bottom: 15px; transition: 0.3s; }
         .footer-link:hover { color: var(--secondary-color); transform: translateX(5px); }
@@ -448,25 +451,44 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ─── RESPONSIVIDADE ─── */
+        /* ─── RESPONSIVIDADE PROFUNDA PARA CELULARES (MUITO IMPORTANTE) ─── */
         @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
-            .hero-content { width: 100%; margin-bottom: 40px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 130px; gap: 30px;}
+            .hero-content { width: 100%; margin-bottom: 0; }
             .hero-form-wrapper { width: 100%; max-width: 100%; }
             .hero-content .google-rating { justify-content: center; }
-            .hero h1 { font-size: 2.5rem; }
-            .quality-card { width: 450px; height: 300px; }
+            .hero h1 { font-size: 2.2rem; }
+            
+            /* Ajuste de imagens lado a lado */
+            .about-container > div:first-of-type { flex-direction: column; text-align: center; }
+            .quality-card { width: 75vw; height: auto; aspect-ratio: 4/3; }
         }
+
         @media (max-width: 600px) {
+            header { padding: 12px 5%; }
+            .logo img { height: 45px; }
+            
+            .hero { padding-top: 110px; padding-bottom: 60px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            
+            /* Ajuste críico no formulário para telas pequenas */
+            .grade-servico { grid-template-columns: 1fr; } /* Fica em 1 coluna no celular para não espremer */
+            .grupo-fotos { flex-direction: column; }
+            .etapa { padding: 15px 15px 25px; } /* Menos padding interno no form no celular */
+            
             .banner-header { flex-direction: column; text-align: center; align-items: center; }
             .banner-header i { margin-bottom: 10px; }
+            
+            .vip-mini-gallery img { height: 60px; }
+            
+            /* Ajusta tamanho dos cards para não gerar rolagem extra */
+            .quality-card { width: 85vw; height: auto; aspect-ratio: 4/3; }
+            .review-card { width: 80vw; max-width: 280px; }
+
             .floating-whatsapp { bottom: 20px; right: 20px; padding: 15px; border-radius: 50%; }
-            .floating-whatsapp span { display: none; }
-            header { padding: 15px; justify-content: center; } 
-            .hero { padding-top: 150px; }
-            .hero h1 { font-size: 2.2rem; }
-            .vip-mini-gallery img { height: 70px; }
-            .quality-card { width: 320px; height: 240px; }
+            .floating-whatsapp span { display: none; } /* Esconde texto do whats no celular */
+            
             .modal-content { width: 95%; max-height: 90vh; }
             .close-modal { top: 10px; right: 20px; font-size: 35px; }
         }
