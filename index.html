@@ -9,6 +9,41 @@
     <meta name="keywords" content="higienização de estofados são luís, limpeza de sofá são luís ma, lavagem a seco de sofá, lavagem de estofados perto de mim, higienização perto de mim, higienização de carro por dentro, limpa colchão, limpeza de estofados valor, lavar tapetes são luís, ecoclean">
     <meta name="author" content="EcoClean Higienizações">
 
+    <!-- FAVICON ADICIONADA AQUI -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/ZnFaubo.png">
+
+    <!-- Dados Estruturados Schema.org para SEO Local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "EcoClean Higienização",
+      "image": "https://i.imgur.com/z84628v.png",
+      "url": "https://ecoclean.com.br",
+      "telephone": "+5598988106716",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "São Luís",
+        "addressRegion": "MA",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -2.5307,
+        "longitude": -44.3068
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "priceRange": "$$"
+    }
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -21,6 +56,12 @@
             --gold-star: #ffc107;
             --danger-red: #ff4757;
             --vip-gold: #c5a059;
+            
+            /* Variáveis isoladas do Formulário */
+            --f-borda: #e3ddd1;
+            --f-text-dark: #1A1A1A;
+            --f-text-light: #666666;
+            --f-radius: 12px;
         }
 
         * {
@@ -89,13 +130,6 @@
         .btn-whatsapp { background-color: var(--whatsapp-green); }
         .btn-whatsapp:hover { background-color: #1ebe57; box-shadow: 0 5px 15px rgba(37,211,102,0.4); }
         
-        .btn-pulse { animation: pulse-hero 2s infinite; }
-        @keyframes pulse-hero {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(37,211,102, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102, 0); }
-        }
-
         .btn-saiba-mais {
             display: inline-flex;
             align-items: center;
@@ -112,14 +146,18 @@
             transform: translateX(5px);
         }
 
-        /* ─── HERO SECTION ─── */
+        /* ─── HERO SECTION (ADAPTADA PARA O FORMULÁRIO) ─── */
         .hero {
             position: relative;
             color: white;
-            text-align: center;
-            padding: 180px 20px 120px;
+            padding: 160px 5% 100px; /* Ajuste para o formulário */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
             overflow: hidden;
             z-index: 1;
+            text-align: left;
         }
         
         .hero::before {
@@ -135,22 +173,24 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(rgba(0, 30, 60, 0.25), rgba(0, 86, 179, 0.40));
+            background: linear-gradient(rgba(0, 30, 60, 0.40), rgba(0, 86, 179, 0.60)); /* Gradient ligeiramente mais escuro para ler melhor e contrastar com o card */
             z-index: -1;
         }
 
+        .hero-content {
+            width: 50%;
+            max-width: 650px;
+        }
+
         .hero h1 { 
-            font-size: 3.2rem; 
+            font-size: 3rem; 
             margin-bottom: 20px; 
             text-shadow: 2px 2px 5px rgba(0,0,0,0.8); 
             line-height: 1.2; 
         }
         .hero p { 
-            font-size: 1.2rem; 
+            font-size: 1.15rem; 
             margin-bottom: 40px; 
-            max-width: 800px; 
-            margin-left: auto; 
-            margin-right: auto; 
             text-shadow: 1px 1px 4px rgba(0,0,0,0.9); 
             font-weight: 500;
         }
@@ -165,11 +205,72 @@
             color: var(--text-color);
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            flex-wrap: wrap;
-            justify-content: center;
         }
         .stars i { color: var(--gold-star); font-size: 1.1rem; }
         .google-rating span { font-weight: bold; }
+
+        /* ─── FORMULÁRIO INTELIGENTE CSS ─── */
+        .hero-form-wrapper { width: 45%; max-width: 500px; z-index: 10; }
+        
+        .card { background: #fff; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); overflow: hidden; width: 100%; color: var(--f-text-dark); }
+        .trilha { display: flex; align-items: center; gap: 8px; padding: 24px 24px 0; }
+        .segmento { height: 6px; flex: 1; background: #eee; border-radius: 4px; overflow: hidden; }
+        .preenchido { height: 100%; width: 0%; background: var(--secondary-color); border-radius: 4px; transition: width .4s ease; }
+        .legenda { font-size: 12px; color: var(--f-text-light); white-space: nowrap; font-weight: bold; }
+
+        .etapa { padding: 20px 24px 30px; }
+        .etapa.oculta { display: none; }
+        .etapa-titulo { font-size: 24px; font-weight: bold; color: var(--primary-color); margin-bottom: 4px; }
+        .etapa-ajuda { font-size: 13.5px; color: var(--f-text-light); margin-bottom: 20px; }
+        .etapa-ajuda.tempo { color: #28a745; font-weight: 600; }
+
+        .campo { margin-bottom: 16px; text-align: left; }
+        .campo label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--f-text-dark); }
+        .campo .opcional-tag { font-weight: 400; color: var(--f-text-light); font-size: 12px; }
+
+        input[type="text"], input[type="tel"], textarea {
+            width: 100%; padding: 13px 14px; border: 1.5px solid var(--f-borda); border-radius: var(--f-radius);
+            font-size: 15px; color: var(--f-text-dark); background: #fcfaf7; transition: all .15s ease;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary-color); background: #fff; }
+        
+        .grade-servico { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .opcao-servico { position: relative; }
+        .opcao-servico input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+        .opcao-servico .rotulo {
+            display: flex; align-items: center; gap: 8px; padding: 12px 10px; border: 1.5px solid var(--f-borda);
+            border-radius: var(--f-radius); font-size: 13px; font-weight: 600; color: var(--f-text-dark);
+            background: #fcfaf7; transition: all .15s ease; cursor: pointer; user-select: none;
+        }
+        .opcao-servico input:checked + .rotulo { border-color: var(--primary-color); background: rgba(0, 86, 179, 0.05); color: var(--primary-color); }
+
+        .grupo-fotos { display: flex; gap: 10px; }
+        .grupo-fotos .opcao-servico .rotulo { justify-content: center; }
+
+        .btn-principal {
+            width: 100%; padding: 15px 18px; background: var(--primary-color); color: #fff; font-size: 15.5px;
+            font-weight: bold; border-radius: var(--f-radius); margin-top: 10px; display: flex; align-items: center;
+            justify-content: center; gap: 8px; border: none; cursor: pointer; transition: background .15s ease;
+        }
+        .btn-principal:hover { background: var(--secondary-color); }
+        .btn-final { background: var(--whatsapp-green); }
+        .btn-final:hover { background: #1ebe57; }
+
+        .btn-voltar { background: transparent; color: var(--f-text-light); font-size: 13px; font-weight: 600; padding: 0 0 10px 0; display: flex; align-items: center; gap: 4px; border: none; cursor: pointer; }
+        .btn-voltar:hover { color: var(--primary-color); }
+
+        .confianca { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; justify-content: center; }
+        .confianca span { font-size: 11px; color: var(--f-text-light); display: flex; align-items: center; gap: 5px; }
+        .confianca span::before { content: "✓"; color: #28a745; font-weight: 700; }
+        .erro { font-size: 12px; color: var(--danger-red); margin-top: 4px; display: none; }
+        .campo.invalido input { border-color: var(--danger-red); }
+        .campo.invalido .erro { display: block; }
+
+        .sucesso { text-align: center; padding: 40px 24px; display: none; }
+        .sucesso.visivel { display: block; }
+        .sucesso .icone-check { width: 60px; height: 60px; border-radius: 50%; background: #eaf3ec; color: #28a745; display: flex; align-items: center; justify-content: center; font-size: 30px; margin: 0 auto 16px; }
+        .sucesso h2 { font-size: 24px; margin-bottom: 10px; color: var(--primary-color); font-weight: bold; }
+        .sucesso p { font-size: 14px; color: var(--f-text-light); margin-bottom: 20px;}
 
         /* ─── TÍTULOS ─── */
         .section-title { color: var(--primary-color); font-size: 2.2rem; margin-bottom: 10px; text-align: center; line-height: 1.3;}
@@ -340,7 +441,10 @@
 
         /* ─── RESPONSIVIDADE ─── */
         @media (max-width: 900px) {
-            .hero { padding-top: 140px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
+            .hero-content { width: 100%; margin-bottom: 40px; }
+            .hero-form-wrapper { width: 100%; max-width: 100%; }
+            .hero-content .google-rating { justify-content: center; }
             .hero h1 { font-size: 2.5rem; }
             .quality-card { width: 450px; height: 300px; }
         }
@@ -363,25 +467,135 @@
 
     <header id="mainHeader">
         <a href="#" class="logo">
-            <img src="https://i.imgur.com/z84628v.png" alt="EcoClean Higienização São Luís">
+            <img src="https://i.imgur.com/z84628v.png" alt="EcoClean Higienização São Luís - Logo Oficial">
         </a>
     </header>
 
     <section class="hero">
-        <div class="google-rating reveal">
-            <div class="stars">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        <!-- Parte do Texto à Esquerda -->
+        <div class="hero-content">
+            <div class="google-rating reveal">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <span>Nota 4.9 no Google em São Luís</span>
             </div>
-            <span>Nota 4.9 no Google em São Luís</span>
+            
+            <h1 class="reveal">Especialistas em Higienização de Estofados em São Luís</h1>
+            <p class="reveal">A EcoClean devolve a aparência de novo ao seu sofá, colchão, tapete e estofamento automotivo. Oferecemos lavagem profunda com busca e entrega, e uma Sala VIP exclusiva.</p>
         </div>
-        
-        <h1 class="reveal">Especialistas em Higienização de Estofados e Limpeza de Sofá em São Luís</h1>
-        <p class="reveal">A EcoClean devolve a aparência de novo ao seu sofá, colchão, tapete e estofamento automotivo. Procurando higienização perto de você? Oferecemos lavagem profunda com busca e entrega, e uma Sala VIP exclusiva.</p>
-        
-        <div class="reveal">
-            <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Vi%20o%20site%20de%20vocês%20e%20gostaria%20de%20um%20orçamento." target="_blank" class="btn btn-whatsapp btn-pulse" style="font-size: 1.2rem; padding: 18px 35px;">
-                <i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento Rápido
-            </a>
+
+        <!-- Formulário Inteligente à Direita -->
+        <div class="hero-form-wrapper reveal" style="transition-delay: 0.2s;">
+            <div class="card">
+                <div class="trilha" id="trilha">
+                    <div class="segmento"><div class="preenchido" id="barra1"></div></div>
+                    <div class="segmento"><div class="preenchido" id="barra2"></div></div>
+                    <span class="legenda" id="legendaEtapa">Etapa 1 de 2</span>
+                </div>
+
+                <!-- ETAPA 1 -->
+                <form id="etapa1" class="etapa">
+                    <div class="etapa-titulo">Orçamento Rápido</div>
+                    <div class="etapa-ajuda tempo">⏱ Leva menos de 15 segundos</div>
+
+                    <div class="campo" id="campoNome">
+                        <label for="nome">Seu nome</label>
+                        <input type="text" id="nome" autocomplete="name" placeholder="Ex: Ana Souza" required>
+                        <div class="erro">Digite seu nome para continuar.</div>
+                    </div>
+
+                    <div class="campo" id="campoWhats">
+                        <label for="whatsapp">Seu WhatsApp</label>
+                        <input type="tel" id="whatsapp" autocomplete="tel" inputmode="numeric" placeholder="(98) 99999-9999" required>
+                        <div class="erro">Informe um WhatsApp válido com DDD.</div>
+                    </div>
+
+                    <div class="campo" id="campoServico">
+                        <label>O que você deseja higienizar/proteger?</label>
+                        <div class="grade-servico">
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s1" value="Sofá">
+                                <label class="rotulo" for="s1"><span class="icone">🛋️</span> Sofá</label>
+                            </div>
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s2" value="Colchão">
+                                <label class="rotulo" for="s2"><span class="icone">🛏️</span> Colchão</label>
+                            </div>
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s3" value="Tapete">
+                                <label class="rotulo" for="s3"><span class="icone">🧶</span> Tapete</label>
+                            </div>
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s4" value="Impermeabilização">
+                                <label class="rotulo" for="s4"><span class="icone">🛡️</span> Impermeabilização</label>
+                            </div>
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s5" value="Estofado Automotivo">
+                                <label class="rotulo" for="s5"><span class="icone">🚗</span> Bancos</label>
+                            </div>
+                            <div class="opcao-servico">
+                                <input type="radio" name="servico" id="s6" value="Outro (Cadeiras, Poltronas...)">
+                                <label class="rotulo" for="s6"><span class="icone">✨</span> Outros</label>
+                            </div>
+                        </div>
+                        <div class="erro">Escolha uma opção para continuar.</div>
+                    </div>
+
+                    <button type="submit" class="btn-principal">Continuar →</button>
+
+                    <div class="confianca">
+                        <span>Sem compromisso</span>
+                        <span>Atendimento humano</span>
+                    </div>
+                </form>
+
+                <!-- ETAPA 2 -->
+                <form id="etapa2" class="etapa oculta">
+                    <button type="button" class="btn-voltar" id="btnVoltar">← Voltar</button>
+                    <div class="etapa-titulo">Quase lá!</div>
+                    <div class="etapa-ajuda">Detalhes para um orçamento preciso. <strong>(Não obrigatório)</strong></div>
+
+                    <div class="campo">
+                        <label for="cidade">Bairro ou Cidade <span class="opcional-tag">(opcional)</span></label>
+                        <input type="text" id="cidade" placeholder="Ex: Turu, Centro, Renascença">
+                    </div>
+
+                    <div class="campo">
+                        <label for="material">Tipo de Tecido <span class="opcional-tag">(opcional)</span></label>
+                        <input type="text" id="material" placeholder="Ex: Suede, Linho, Couro, Não sei">
+                    </div>
+
+                    <div class="campo">
+                        <label for="medidas">Quantidade / Tamanho <span class="opcional-tag">(opcional)</span></label>
+                        <input type="text" id="medidas" placeholder="Ex: Sofá de 3 lugares, 2 colchões">
+                    </div>
+
+                    <div class="campo">
+                        <label>Você possui fotos da peça? <span class="opcional-tag">(opcional)</span></label>
+                        <div class="grupo-fotos">
+                            <div class="opcao-servico" style="flex:1">
+                                <input type="radio" name="fotos" id="f1" value="Sim">
+                                <label class="rotulo" for="f1">📷 Sim</label>
+                            </div>
+                            <div class="opcao-servico" style="flex:1">
+                                <input type="radio" name="fotos" id="f2" value="Ainda não">
+                                <label class="rotulo" for="f2">🙅 Ainda não</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-principal btn-final" id="btnFinal"><i class="fa-brands fa-whatsapp"></i> Solicitar no WhatsApp</button>
+                </form>
+
+                <!-- TELA DE SUCESSO -->
+                <div class="sucesso" id="telaSucesso">
+                    <div class="icone-check">✓</div>
+                    <h2>Tudo Pronto!</h2>
+                    <p>Estamos redirecionando você para o WhatsApp. Se não abrir, clique no botão abaixo.</p>
+                    <button type="button" class="btn-principal btn-final" id="btnAbrirManual">Abrir WhatsApp Manualmente</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -391,42 +605,42 @@
         
         <div class="services-grid">
             <div class="service-category reveal">
-                <img src="https://i.imgur.com/qvcU3J2.jpg" alt="Limpeza de Sofá e Higienização de Estofados São Luís" class="service-image">
+                <img src="https://i.imgur.com/qvcU3J2.jpg" alt="Limpeza de Sofá e Higienização de Estofados São Luís" class="service-image" loading="lazy">
                 <h3>Limpeza de Sofá e Estofados</h3>
                 <p>Muito superior à lavagem a seco convencional, nossa limpeza profunda remove ácaros, fungos e sujeiras, devolvendo o conforto ao seu sofá.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Higienização%20de%20Estofados." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             
             <div class="service-category reveal" style="transition-delay: 0.1s;">
-                <img src="https://i.imgur.com/GgdEYE9.jpg" alt="Limpa Colchão e Higienização" class="service-image">
+                <img src="https://i.imgur.com/GgdEYE9.jpg" alt="Limpa Colchão e Higienização Anti-ácaros São Luís" class="service-image" loading="lazy">
                 <h3>Higienização e Limpa Colchão</h3>
                 <p>Elimine alérgenos invisíveis e tenha noites de sono mais saudáveis, tranquilas e seguras para toda a família com o nosso serviço de limpa colchão.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Higienização%20de%20Colchões." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
             <div class="service-category reveal" style="transition-delay: 0.2s;">
-                <img src="https://i.imgur.com/f11WXce.jpg" alt="Lavagem de Tapetes São Luís" class="service-image">
+                <img src="https://i.imgur.com/f11WXce.jpg" alt="Lavagem de Tapetes Profissional em São Luís" class="service-image" loading="lazy">
                 <h3>Lavagem de Tapetes</h3>
                 <p>Remoção profunda de sujeira, odores (como urina de pets) e microrganismos, preservando a textura, a cor e a durabilidade do tapete.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Higienização%20de%20Tapetes." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
             <div class="service-category reveal">
-                <img src="https://i.imgur.com/ZzSLBRe.jpg" alt="Higienização de carro por dentro São Luís" class="service-image">
+                <img src="https://i.imgur.com/ZzSLBRe.jpg" alt="Higienização de carro por dentro e limpeza interna em São Luís" class="service-image" loading="lazy">
                 <h3>Higienização Automotiva</h3>
                 <p>Renove o interior do seu veículo! Somos especialistas em higienizar carros por dentro: limpeza de bancos, teto e carpetes automotivos.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Higienização%20Automotiva." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
             <div class="service-category reveal" style="transition-delay: 0.1s;">
-                <video src="https://i.imgur.com/qbBuncp.mp4" autoplay loop muted playsinline class="service-image"></video>
+                <video src="https://i.imgur.com/qbBuncp.mp4" autoplay loop muted playsinline class="service-image" style="object-fit: cover;"></video>
                 <h3>Impermeabilização de Estofados</h3>
                 <p>Proteção avançada que cria uma barreira contra líquidos e sujeiras, facilitando a limpeza e prolongando a vida útil do estofado.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Impermeabilização%20de%20Estofados." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
             <div class="service-category reveal" style="transition-delay: 0.2s;">
-                <img src="https://i.imgur.com/BmLviFu.jpg" alt="Auditórios e Salas de Cinema" class="service-image">
+                <img src="https://i.imgur.com/BmLviFu.jpg" alt="Higienização de Auditórios e Espaços Comerciais em São Luís" class="service-image" loading="lazy">
                 <h3>Auditórios e Espaços Comerciais</h3>
                 <p>Equipe técnica e equipamentos robustos para higienização em grande escala. Garantimos um ambiente limpo e impecável para o seu público.</p>
                 <a href="https://api.whatsapp.com/send?phone=5598988106716&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Higienização%20de%20Auditórios%20e%20Cinemas." target="_blank" class="btn-saiba-mais">Saiba mais <i class="fa-solid fa-arrow-right"></i></a>
@@ -453,9 +667,9 @@
                     </div>
                 </div>
                 <div class="vip-mini-gallery">
-                    <img src="https://i.imgur.com/AWl8R8W.jpg" alt="Fachada EcoClean">
-                    <img src="https://i.imgur.com/N46k5vV.jpg" alt="Poltronas VIP">
-                    <img src="https://i.imgur.com/woBBiC8.jpg" alt="Mesa de Sinuca">
+                    <img src="https://i.imgur.com/AWl8R8W.jpg" alt="Fachada EcoClean São Luís" loading="lazy">
+                    <img src="https://i.imgur.com/N46k5vV.jpg" alt="Poltronas Sala VIP EcoClean" loading="lazy">
+                    <img src="https://i.imgur.com/woBBiC8.jpg" alt="Mesa de Sinuca Sala VIP" loading="lazy">
                 </div>
             </div>
 
@@ -484,7 +698,7 @@
             
             <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; margin-bottom: 40px;">
                 <div style="flex: 1; min-width: 300px;">
-                    <img src="https://i.imgur.com/zu2X9kq.jpg" alt="Sede da Ecoclean Higienização" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover;">
+                    <img src="https://i.imgur.com/zu2X9kq.jpg" alt="Sede da Ecoclean Higienização em São Luís" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover;" loading="lazy">
                 </div>
                 
                 <div class="about-content" style="flex: 1; min-width: 300px;">
@@ -528,17 +742,17 @@
         
         <div class="reviews-strip bg-light-strip reveal">
             <div class="reviews-track">
-                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Resultado Limpeza EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Limpeza de Estofado EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização Completa EcoClean"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Antes e depois de sofá limpo pela EcoClean" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Resultado de limpeza de estofado em São Luís" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização completa de estofados e tapetes" loading="lazy"></div>
                 
-                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Resultado Limpeza EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Limpeza de Estofado EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização Completa EcoClean"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Antes e depois de sofá limpo pela EcoClean" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Resultado de limpeza de estofado em São Luís" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização completa de estofados e tapetes" loading="lazy"></div>
 
-                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Resultado Limpeza EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Limpeza de Estofado EcoClean"></div>
-                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização Completa EcoClean"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/8N8CArq.jpg" alt="Antes e depois de sofá limpo pela EcoClean" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/G0bKUzK.jpg" alt="Resultado de limpeza de estofado em São Luís" loading="lazy"></div>
+                <div class="quality-card"><img src="https://i.imgur.com/KQRR2U0.jpg" alt="Higienização completa de estofados e tapetes" loading="lazy"></div>
             </div>
         </div>
     </section>
@@ -606,23 +820,23 @@
         
         <div class="reviews-strip bg-white-strip reveal">
             <div class="reviews-track">
-                <div class="review-card"><img src="https://i.imgur.com/9nKCwUa.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/MXPqU27.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/XrrY7x0.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/NPRAio3.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/5IQlYIZ.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/q29N6Xt.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/QVedVwW.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/RvwisGJ.png" alt="Avaliação de Cliente"></div>
+                <div class="review-card"><img src="https://i.imgur.com/9nKCwUa.png" alt="Avaliação de cliente satisfeito EcoClean" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/MXPqU27.png" alt="Depoimento de cliente em São Luís" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/XrrY7x0.png" alt="Feedback de lavagem de sofá" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/NPRAio3.png" alt="Avaliação nota máxima no Google" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/5IQlYIZ.png" alt="Comentário de cliente higienização" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/q29N6Xt.png" alt="Avaliação de serviço de tapetes" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/QVedVwW.png" alt="Recomendação de cliente EcoClean" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/RvwisGJ.png" alt="Depoimento limpa colchão" loading="lazy"></div>
                 
-                <div class="review-card"><img src="https://i.imgur.com/9nKCwUa.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/MXPqU27.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/XrrY7x0.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/NPRAio3.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/5IQlYIZ.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/q29N6Xt.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/QVedVwW.png" alt="Avaliação de Cliente"></div>
-                <div class="review-card"><img src="https://i.imgur.com/RvwisGJ.png" alt="Avaliação de Cliente"></div>
+                <div class="review-card"><img src="https://i.imgur.com/9nKCwUa.png" alt="Avaliação de cliente satisfeito EcoClean" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/MXPqU27.png" alt="Depoimento de cliente em São Luís" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/XrrY7x0.png" alt="Feedback de lavagem de sofá" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/NPRAio3.png" alt="Avaliação nota máxima no Google" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/5IQlYIZ.png" alt="Comentário de cliente higienização" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/q29N6Xt.png" alt="Avaliação de serviço de tapetes" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/QVedVwW.png" alt="Recomendação de cliente EcoClean" loading="lazy"></div>
+                <div class="review-card"><img src="https://i.imgur.com/RvwisGJ.png" alt="Depoimento limpa colchão" loading="lazy"></div>
             </div>
         </div>
 
@@ -639,7 +853,7 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo" style="margin-bottom: 15px;">
-                    <img src="https://i.imgur.com/z84628v.png" alt="Logo EcoClean" style="height: 60px;">
+                    <img src="https://i.imgur.com/z84628v.png" alt="Logo EcoClean Rodapé" style="height: 60px;" loading="lazy">
                 </div>
                 <p style="color: #ccc;">Especialistas em renovar sofás, estofados e tapetes, proteger sua família e garantir um ambiente limpo e saudável em São Luís.</p>
             </div>
@@ -680,11 +894,106 @@
     </a>
 
     <div id="imageModal" class="modal">
-        <span class="close-modal">×</span>
+        <span class="close-modal">&times;</span>
         <img class="modal-content" id="expandedImg">
     </div>
 
     <script>
+        // ─── LÓGICA DO FORMULÁRIO INTELIGENTE ───
+        const NUMERO_WHATSAPP = "5598988106716"; 
+
+        const etapa1 = document.getElementById('etapa1');
+        const etapa2 = document.getElementById('etapa2');
+        const telaSucesso = document.getElementById('telaSucesso');
+        const barra1 = document.getElementById('barra1');
+        const barra2 = document.getElementById('barra2');
+        const legendaEtapa = document.getElementById('legendaEtapa');
+        const btnVoltar = document.getElementById('btnVoltar');
+
+        let dados = {};
+
+        barra1.style.width = '100%';
+        barra2.style.width = '0%';
+
+        const inputWhats = document.getElementById('whatsapp');
+        inputWhats.addEventListener('input', () => {
+            let v = inputWhats.value.replace(/\D/g, '').slice(0, 11);
+            if (v.length > 6) {
+                v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+            } else if (v.length > 2) {
+                v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            } else if (v.length > 0) {
+                v = v.replace(/(\d{0,2})/, '($1');
+            }
+            inputWhats.value = v;
+        });
+
+        function mostrarErro(campoId, mostrar){
+            document.getElementById(campoId).classList.toggle('invalido', mostrar);
+        }
+
+        etapa1.addEventListener('submit', function(e){
+            e.preventDefault();
+            const nome = document.getElementById('nome').value.trim();
+            const whats = inputWhats.value.replace(/\D/g, '');
+            const servicoEl = document.querySelector('input[name="servico"]:checked');
+
+            let valido = true;
+            if (nome.length < 2){ mostrarErro('campoNome', true); valido = false; } else { mostrarErro('campoNome', false); }
+            if (whats.length < 10){ mostrarErro('campoWhats', true); valido = false; } else { mostrarErro('campoWhats', false); }
+            if (!servicoEl){ mostrarErro('campoServico', true); valido = false; } else { mostrarErro('campoServico', false); }
+
+            if (!valido) return;
+
+            dados.nome = nome; dados.whatsapp = whats; dados.servico = servicoEl.value;
+
+            etapa1.classList.add('oculta');
+            etapa2.classList.remove('oculta');
+            
+            barra1.style.width = '100%';
+            barra2.style.width = '100%';
+            legendaEtapa.textContent = 'Etapa 2 de 2';
+        });
+
+        btnVoltar.addEventListener('click', function(){
+            etapa2.classList.add('oculta');
+            etapa1.classList.remove('oculta');
+            
+            barra1.style.width = '100%';
+            barra2.style.width = '0%';
+            legendaEtapa.textContent = 'Etapa 1 de 2';
+        });
+
+        let linkFinal = '';
+        etapa2.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            const cidade = document.getElementById('cidade').value.trim();
+            const material = document.getElementById('material').value.trim();
+            const medidas = document.getElementById('medidas').value.trim();
+            const fotosEl = document.querySelector('input[name="fotos"]:checked');
+
+            let mensagem = `Olá da EcoClean! Gostaria de solicitar um orçamento.\n\n`;
+            mensagem += `👤 *Nome:* ${dados.nome}\n`;
+            mensagem += `📞 *WhatsApp:* ${dados.whatsapp}\n`;
+            mensagem += `✨ *Serviço:* ${dados.servico}\n`;
+            if (cidade)   mensagem += `📍 *Bairro:* ${cidade}\n`;
+            if (material) mensagem += `🧵 *Tecido:* ${material}\n`;
+            if (medidas)  mensagem += `📏 *Tamanho:* ${medidas}\n`;
+            if (fotosEl)  mensagem += `📸 *Possui fotos?* ${fotosEl.value}\n`;
+
+            linkFinal = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(mensagem)}`;
+
+            etapa2.classList.add('oculta');
+            telaSucesso.classList.add('visivel');
+
+            window.open(linkFinal, '_blank');
+        });
+
+        document.getElementById('btnAbrirManual').addEventListener('click', function(){
+            if (linkFinal) window.open(linkFinal, '_blank');
+        });
+
         // ─── CABEÇALHO COM SCROLL ───
         const header = document.getElementById('mainHeader');
         window.addEventListener('scroll', () => {
